@@ -1,0 +1,6 @@
+Demo code snippets related to MQTT
+
+msg_signing - C message publisher, signing messages with openssl
+            - python message consumer, verifying signatures
+
+
