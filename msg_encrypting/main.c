@@ -134,17 +134,6 @@ int encrypt_message(unsigned char **encrypted, unsigned char *clear, uint32_t cl
     if (encrypted_len == -1) {
         fatal("Failed to encrypt data. %s", ERR_error_string(ERR_get_error(), NULL));
     }
-#if 0 
-    // base64 encode the encrypted text to stdout....
-    // might be nice to have this as an option 
-    BIO *bio, *b64;
-    b64 = BIO_new(BIO_f_base64());
-    bio = BIO_new_fp(stdout, BIO_NOCLOSE);
-    bio = BIO_push(b64, bio);
-    BIO_write(bio, *encrypted, encrypted_len);
-    BIO_flush(bio);
-    BIO_free_all(bio);
-#endif
     
     return encrypted_len;
 }
