@@ -11,6 +11,7 @@ import hmac
 import logging
 import M2Crypto.RSA
 import mosquitto
+import ctypes
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s - %(message)s")
 log = logging.getLogger("main")
@@ -31,8 +32,9 @@ def on_message(msg):
     """
     log.info("Received message on topic %s, length: %d bytes", msg.topic, msg.payloadlen)
 
-    # Ugly. See http://stackoverflow.com/questions/7082788/efficiently-turning-a-ctypes-lp-c-ubyte-into-a-pyhon-str
-    payload_bytes = ''.join(chr(msg.payload[i]) for i in xrange(msg.payloadlen)) 
+    # This will disappear in a future mosquitto version,
+    # you will be able to use msg.payload as is
+    payload_bytes = ctypes.string_at(msg.payload, msg.payloadlen)
     if "/signed/" in msg.topic:
         log.debug("message is signed! will attempt to verify, msg is: <%s>", payload_bytes)
         topic_remainder, sig = msg.topic.rsplit('/', 1)
