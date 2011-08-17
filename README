@@ -2,5 +2,9 @@ Demo code snippets related to MQTT
 
 msg_signing - C message publisher, signing messages with openssl
             - python message consumer, verifying signatures
+msg_encrypting - C message publisher, encrypts payload with public key,
+                 then signs with shared secret key (HMAC)
+               - python message consumer, verifies signatures, and if valid,
+                 decrypts using private key
 
 
