@@ -1,14 +1,18 @@
 /* 
- * Basic demo of sending HMAC signed messages to an MQTT server
+ * Basic demo of public key encrypting messages, then signing using a shared key,
+ * then finally publishing to an MQTT server.
  * 
- * The message HMAC is calculated, and put in the topic, like so
- * /demo/signed/<hmac_signature_here>
+ * three messages are sent every second or so...
+ * * demo/insecure   - plain text of message
+ * * demo/insecure/signed/<hmac_signature> - signed, but clear text
+ * * demo/encrypted/signed/<hmac_signature> - encrypted, then signed
  * 
  * Karl Palsson <karlp@remake.is>
  * 
  * Takes two optional arguments, the MQTT server host, and the shared key
  * Default MQTT host is localhost
  * Default shared key is "karl_loves_you"
+ * the public key is embedded in the code below...
  * 
  * Released into the public domain as demonstration code
  */
